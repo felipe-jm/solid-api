@@ -1,1 +1,11 @@
+# Dependencies
 node_modules
+
+# Build
+build
+
+# NPM
+.npmrc
+
+# Env
+.env
