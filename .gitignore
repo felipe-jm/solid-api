@@ -12,3 +12,7 @@ build
 
 # Coverage
 coverage
+
+# VSCode
+.vscode
+.DS_Store
