@@ -40,10 +40,10 @@ model CheckIn {
 }
 
 model Gym {
-  id          String @id @default(uuid())
-  title       String
-  description String
-  phone       String
+  id          String  @id @default(uuid())
+  name        String
+  description String?
+  phone       String?
   latitude    Float
   longitude   Float
 
