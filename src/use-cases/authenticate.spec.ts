@@ -7,13 +7,13 @@ import { InvalidCredentialsError } from "./errors/invalid-credentials-error";
 let usersRepository: InMemoryUsersRepository;
 let sut: AuthenticateUseCase;
 
-describe("Register Use Case", () => {
+describe("Authenticate Use Case", () => {
   beforeEach(() => {
     usersRepository = new InMemoryUsersRepository();
     sut = new AuthenticateUseCase(usersRepository);
   });
 
-  it("should be able to register", async () => {
+  it("should be able to authenticate", async () => {
     await usersRepository.create({
       name: "John Doe",
       email: "john.doe@example.com",
