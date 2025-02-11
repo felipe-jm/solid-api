@@ -1,6 +1,6 @@
 import { expect, describe, it, beforeEach } from "vitest";
 import { InMemoryUsersRepository } from "@/repositories/in-memory/in-memory-users-repository";
-import { hash } from "bcryptjs";
+import bcryptjs from "bcryptjs";
 import { CheckInUseCase } from "./check-in";
 import { InMemoryCheckInsRepository } from "@/repositories/in-memory/in-memory-check-ins-repository";
 
@@ -19,7 +19,7 @@ describe("Check In Use Case", () => {
     const user = await usersRepository.create({
       name: "John Doe",
       email: "john.doe@example.com",
-      password_hash: await hash("123456", 6),
+      password_hash: await bcryptjs.hash("123456", 6),
     });
 
     const { checkIn } = await sut.execute({

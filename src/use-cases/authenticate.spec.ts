@@ -1,7 +1,7 @@
 import { expect, describe, it, beforeEach } from "vitest";
 import { InMemoryUsersRepository } from "@/repositories/in-memory/in-memory-users-repository";
 import { AuthenticateUseCase } from "./authenticate";
-import { hash } from "bcryptjs";
+import bcryptjs from "bcryptjs";
 import { InvalidCredentialsError } from "./errors/invalid-credentials-error";
 
 let usersRepository: InMemoryUsersRepository;
@@ -17,7 +17,7 @@ describe("Authenticate Use Case", () => {
     await usersRepository.create({
       name: "John Doe",
       email: "john.doe@example.com",
-      password_hash: await hash("123456", 6),
+      password_hash: await bcryptjs.hash("123456", 6),
     });
 
     const { user } = await sut.execute({
@@ -38,7 +38,7 @@ describe("Authenticate Use Case", () => {
     await usersRepository.create({
       name: "John Doe",
       email: "john.doe@example.com",
-      password_hash: await hash("123456", 6),
+      password_hash: await bcryptjs.hash("123456", 6),
     });
 
     await expect(

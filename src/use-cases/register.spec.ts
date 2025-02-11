@@ -1,6 +1,6 @@
 import { expect, describe, it, beforeEach } from "vitest";
 import { RegisterUseCase } from "./register";
-import { compare } from "bcryptjs";
+import bcryptjs from "bcryptjs";
 import { InMemoryUsersRepository } from "@/repositories/in-memory/in-memory-users-repository";
 import { UserAlreadyExistsError } from "./errors/user-already-exists";
 
@@ -30,7 +30,7 @@ describe("Register Use Case", () => {
       password: "123456",
     });
 
-    const isPasswordCorrectlyHashed = await compare(
+    const isPasswordCorrectlyHashed = await bcryptjs.compare(
       "123456",
       user.password_hash
     );
