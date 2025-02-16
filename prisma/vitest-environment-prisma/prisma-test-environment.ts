@@ -20,12 +20,16 @@ function generateDatabaseUrl(schema: string) {
 export default <Environment>{
   name: "prisma",
   transformMode: "ssr",
-  setup() {
+  async setup() {
     const schema = randomUUID();
     const databaseUrl = generateDatabaseUrl(schema);
 
     process.env.DATABASE_URL = databaseUrl;
 
+    // Create the schema first
+    await prisma.$executeRawUnsafe(`CREATE SCHEMA IF NOT EXISTS "${schema}"`);
+
+    // Run migrations after schema creation
     execSync(`npx prisma migrate deploy`);
 
     return {
