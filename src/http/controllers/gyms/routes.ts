@@ -1,12 +1,17 @@
 import { FastifyInstance } from "fastify";
 import { verifyJwt } from "@/http/middlewares/verify-jwt";
 
+import { search } from "./search";
+import { nearby } from "./nearby";
+import { create } from "./create";
+
 export async function gymRoutes(app: FastifyInstance) {
   app.addHook("onRequest", async (request) => {
     await request.jwtVerify();
   });
 
-  // Unauthenticated routes
+  app.get("/gyms/search", search);
+  app.get("/gyms/nearby", nearby);
 
-  // Authenticated routes
+  app.post("/gyms", { onRequest: [verifyJwt] }, create);
 }
