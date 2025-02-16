@@ -13,5 +13,5 @@ export async function gymRoutes(app: FastifyInstance) {
   app.get("/gyms/search", search);
   app.get("/gyms/nearby", nearby);
 
-  app.post("/gyms", { onRequest: [verifyJwt] }, create);
+  app.post("/gyms", create);
 }
